@@ -23,21 +23,20 @@ public class MyQqServer {
 				User u = (User) ois.readObject();
 				System.out.println("用户名:" + u.getAccount()
 						+ " 密码:" + u.getPassword());
-				Message m = new Message();
+				Message m = new Message(null,1);
 				ObjectOutputStream oos = new ObjectOutputStream(
 						s.getOutputStream());
-				if (u.getPassword().equals("123456")) {
+				if (u.getPassword().equals("123")) {
 
-					m.setMesType("1");
 					oos.writeObject(m);
-//					SerConClientThread scct = new SerConClientThread(s);
-//					ManageClientThread.addClientThread(u.getAccount(), scct);
-//
-//					scct.start();
+					SerConClientThread scct = new SerConClientThread(s);
+					ManageClientThread.addClientThread(u.getAccount(), scct);
+
+					scct.start();
 //
 //					scct.notifyOther(u.getAccount());
 				} else {
-					m.setMesType("2");
+					m.setType(2);
 					oos.writeObject(m);
 					s.close();
 
