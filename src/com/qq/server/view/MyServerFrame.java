@@ -38,7 +38,7 @@ public class MyServerFrame extends JFrame implements ActionListener {
 		// TODO Auto-generated method stub
 		if(arg0.getSource()==jb1)
 		{
-			new MyQqServer();
+			new MyQqServer().start();
 		}
 	}
 	

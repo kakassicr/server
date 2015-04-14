@@ -8,10 +8,17 @@ import java.net.Socket;
 import com.chat.common.Message;
 import com.chat.common.User;
 
-public class MyQqServer {
+public class MyQqServer extends Thread{
 
 	public MyQqServer() {
 
+		
+
+	}
+	
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
 		try {
 			ServerSocket ss = new ServerSocket(9999);
 			System.out.println("已监听");
@@ -50,7 +57,6 @@ public class MyQqServer {
 		} finally {
 
 		}
-
 	}
 
 }
