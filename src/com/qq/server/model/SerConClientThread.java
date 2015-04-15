@@ -23,7 +23,7 @@ public class SerConClientThread extends Thread {
 		while (it.hasNext()) {
 			Message m = new Message("", 1);
 			m.setCon(iam);
-			m.setType(Integer.parseInt(MessageType.message_ret_onLineFriend));
+			m.setType(MessageType.message_ret_onLineFriend);
 
 			String onLineUserId = it.next().toString();
 			try {
@@ -43,7 +43,7 @@ public class SerConClientThread extends Thread {
 	public void run() {
 		try {
 			ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
-			;
+
 			while (true) {
 				Message m = (Message) ois.readObject();
 
@@ -61,7 +61,7 @@ public class SerConClientThread extends Thread {
 
 					oos.writeObject(m);
 				}
-				// }else
+				// }else3
 				// if(m.getMesType().equals(MessageType.message_get_onLineFriend))
 				// {
 				// System.out.println(m.getSender()+" Ҫ��ĺ���");

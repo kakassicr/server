@@ -24,6 +24,7 @@ public class MyServerFrame extends JFrame implements ActionListener {
 		jb1=new JButton("启动服务");
 		jb1.addActionListener(this);
 		jb2=new JButton("关闭服务");
+		jb2.addActionListener(this);
 		jp1.add(jb1);
 		jp1.add(jb2);
 		
@@ -33,13 +34,18 @@ public class MyServerFrame extends JFrame implements ActionListener {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 	}
-
+	private MyQqServer myQqServer;
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		if(arg0.getSource()==jb1)
 		{
-			new MyQqServer().start();
+			myQqServer=new MyQqServer();
+			myQqServer.start();
 		}
+//		if(arg0.getSource()==jb2)
+//		{
+//			myQqServer.close();
+//		}
 	}
 	
 
