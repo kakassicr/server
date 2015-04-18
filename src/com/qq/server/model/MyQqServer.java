@@ -26,7 +26,7 @@ public class MyQqServer extends Thread{
 			System.out.println("已监听");
 			while (true) {
 				Socket s= ss.accept();
-
+				System.out.println("已连接");
 				ObjectInputStream ois = new ObjectInputStream(
 						s.getInputStream());
 				User u = (User) ois.readObject();
@@ -49,10 +49,7 @@ public class MyQqServer extends Thread{
 				} else {
 					m.setType(2);
 					oos.writeObject(m);
-					ois.close();
-					oos.close();
 					s.close();
-
 				}
 
 			}

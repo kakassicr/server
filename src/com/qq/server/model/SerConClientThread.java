@@ -39,13 +39,16 @@ public class SerConClientThread extends Thread {
 
 		}
 	}
-
+	
 	public void run() {
 		try {
-			ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
-
+			ObjectInputStream ois;
+			ObjectOutputStream oos;
+			Message m;
+			ois = new ObjectInputStream(s.getInputStream());
 			while (true) {
-				Message m = (Message) ois.readObject();
+				
+				m = (Message) ois.readObject();
 
 				System.out.println(m.getSender() + " 给 " + m.getGetter()
 						+ " 说:" + m.getCon());
@@ -53,14 +56,12 @@ public class SerConClientThread extends Thread {
 				// if(m.getMesType().equals(MessageType.message_comm_mes))
 				// {
 				//
-				if (!m.getSender().equals(m.getGetter())) {
-					SerConClientThread sc = ManageClientThread
-							.getClientThread(m.getGetter());
-					ObjectOutputStream oos = new ObjectOutputStream(
-							sc.s.getOutputStream());
-
+//				if (!m.getSender().equals(m.getGetter())) {
+				SerConClientThread sc = ManageClientThread.getClientThread(m.getGetter());
+				oos = new ObjectOutputStream(sc.s.getOutputStream());
 					oos.writeObject(m);
-				}
+					System.out.println("oos");
+//				}
 				// }else3
 				// if(m.getMesType().equals(MessageType.message_get_onLineFriend))
 				// {
