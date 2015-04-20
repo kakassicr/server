@@ -5,6 +5,7 @@ import java.net.*;
 import java.io.*;
 
 import com.chat.common.*;
+import com.qq.server.service.MessageService;
 
 public class SerConClientThread extends Thread {
 
@@ -45,11 +46,13 @@ public class SerConClientThread extends Thread {
 			ObjectInputStream ois;
 			ObjectOutputStream oos;
 			Message m;
+			MessageService messageService=new MessageService();
 			ois = new ObjectInputStream(s.getInputStream());
 			while (true) {
 				
 				m = (Message) ois.readObject();
-
+				m.setIsGet(0);
+				
 				System.out.println(m.getSender() + " 给 " + m.getGetter()
 						+ " 说:" + m.getCon());
 
@@ -60,7 +63,9 @@ public class SerConClientThread extends Thread {
 				SerConClientThread sc = ManageClientThread.getClientThread(m.getGetter());
 				oos = new ObjectOutputStream(sc.s.getOutputStream());
 					oos.writeObject(m);
+					messageService.addMessage(m);
 					System.out.println("oos");
+					
 //				}
 				// }else3
 				// if(m.getMesType().equals(MessageType.message_get_onLineFriend))
